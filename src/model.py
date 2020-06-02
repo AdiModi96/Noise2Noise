@@ -10,82 +10,82 @@ class UNET(nn.Module):
         super().__init__()
 
         self.encoder_block_1 = nn.Sequential(
-            nn.Conv2d(in_channels=UNET.input_channels, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=UNET.input_channels, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_2 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_3 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_4 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_5 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_convolution = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
         )
 
         self.decoder_upsample = nn.UpsamplingNearest2d(scale_factor=2)
 
         self.decoder_block_5 = nn.Sequential(
-            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_4 = nn.Sequential(
-            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_3 = nn.Sequential(
-            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_2 = nn.Sequential(
-            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=144, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96, out_channels=96, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_1 = nn.Sequential(
-            nn.Conv2d(in_channels=96 + UNET.input_channels, out_channels=64, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=96 + UNET.input_channels, out_channels=64, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=32, out_channels=UNET.input_channels, kernel_size=3, stride=1, padding=1, padding_mode='same')
+            nn.Conv2d(in_channels=32, out_channels=UNET.input_channels, kernel_size=3, stride=1, padding=1, padding_mode='replicate')
         )
 
     def forward(self, tensor):
@@ -116,82 +116,82 @@ class EncoderDecoder(nn.Module):
         super().__init__()
 
         self.encoder_block_1 = nn.Sequential(
-            nn.Conv2d(in_channels=EncoderDecoder.input_channels, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=EncoderDecoder.input_channels, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_2 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_3 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_4 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_block_5 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.MaxPool2d(kernel_size=2)
         )
 
         self.encoder_convolution = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same', bias=True),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate', bias=True),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
         )
 
         self.decoder_upsample = nn.UpsamplingNearest2d(scale_factor=2)
 
         self.decoder_block_5 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_4 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_3 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_2 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
             nn.UpsamplingNearest2d(scale_factor=2)
         )
 
         self.decoder_block_1 = nn.Sequential(
-            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=48, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=48, out_channels=32, kernel_size=3, stride=1, padding=1, padding_mode='same'),
+            nn.Conv2d(in_channels=48, out_channels=32, kernel_size=3, stride=1, padding=1, padding_mode='replicate'),
             nn.LeakyReLU(inplace=True, negative_slope=0.1),
-            nn.Conv2d(in_channels=32, out_channels=EncoderDecoder.input_channels, kernel_size=3, stride=1, padding=1, padding_mode='same')
+            nn.Conv2d(in_channels=32, out_channels=EncoderDecoder.input_channels, kernel_size=3, stride=1, padding=1, padding_mode='replicate')
         )
 
     def forward(self, tensor):
