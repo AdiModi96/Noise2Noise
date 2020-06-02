@@ -1,0 +1,26 @@
+pretrained_model_file_path = None
+
+MODEL = {
+    'BATCH_SIZE': 5,
+    'NUM_EPOCHS': 100,
+    'NUM_WORKERS': 5
+}
+if torch.cuda.is_available():
+    MODEL['DEVICE'] = 'cuda'
+    torch.cuda.init()
+    backends.cudnn.benchmark = True
+else:
+    MODEL['DEVICE'] = 'cpu'
+
+OPTIMIZER = {
+    'LR': 0.001,
+    'BETAS': (0.9, 0.99),
+    'EPSILON': 1e-08,
+    'LOSS_FUNCTION': torch.nn.MSELoss().to(MODEL['DEVICE'])
+}
+
+DATASET = {
+    'NOISE_TYPE': NoiseDataloader.GAUSSIAN,
+    'STD': 0.1,
+    'NOISY_PER_IMAGE': 250
+}

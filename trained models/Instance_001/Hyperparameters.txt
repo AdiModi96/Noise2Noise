@@ -1,0 +1,26 @@
+pretrained_model_file_path = os.path.abspath(r'D:\Codes\Python\IIT Bombay\Semester 3\[CS 663] Fundamentals of Digital Image Processing\Course Project\trained models\Instance_000\Model_Epoch_012.pt')
+
+MODEL = {
+    'BATCH_SIZE': 5,
+    'NUM_EPOCHS': 100,
+    'NUM_WORKERS': 4
+}
+if torch.cuda.is_available():
+    MODEL['DEVICE'] = 'cuda'
+    torch.cuda.init()
+    backends.cudnn.benchmark = True
+else:
+    MODEL['DEVICE'] = 'cpu'
+
+OPTIMIZER = {
+    'LR': 0.001,
+    'BETAS': (0.9, 0.99),
+    'EPSILON': 1e-08,
+    'LOSS_FUNCTION': torch.nn.MSELoss().to(MODEL['DEVICE'])
+}
+
+DATASET = {
+    'NOISE_TYPE': NoiseDataloader.GAUSSIAN,
+    'STD': 0.5,
+    'NOISY_PER_IMAGE': 500
+}
