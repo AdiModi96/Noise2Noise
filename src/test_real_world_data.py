@@ -8,20 +8,23 @@ from dataloader import NoiseDataloader
 from torch import nn
 from matplotlib import pyplot as plt
 
-
 IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png']
+
 
 def denoise_using_bilateral(noisy_image):
     return cv2.bilateralFilter(noisy_image, 15, 2, 2)
 
+
 def denoise_using_PCA(noisy_image):
     return noisy_image
+
 
 def denosie_using_noise2noise(noisy_image):
     denoised_image = network(torch.unsqueeze(torch.as_tensor(NoiseDataloader.convert_image_to_model_input(noisy_image)), dim=0))[0]
     denoised_image = NoiseDataloader.convert_model_output_to_image(denoised_image)
 
     return denoised_image
+
 
 pretrained_model_folder_path = os.path.join(pp.trained_models_folder_path, 'Instance_000', 'Model_Epoch_012.pt')
 global network

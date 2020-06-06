@@ -8,7 +8,6 @@ test_dataloader = NoiseDataloader(dataset_type=NoiseDataloader.TEST,
                                   noise_type=NoiseDataloader.TEXT_OVERLAY)
 
 for i in range(5):
-
     idx = random.randint(0, len(test_dataloader))
 
     plt.figure(num='Data Loader Tester', figsize=(20, 10))

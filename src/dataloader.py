@@ -1,5 +1,5 @@
 import torch
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 from torch import tensor
 import cv2
 import numpy as np
@@ -8,8 +8,8 @@ import os
 import sys
 import project_paths as pp
 
-class NoiseDataloader(Dataset):
 
+class NoiseDataloader(Dataset):
     IMAGE_EXTENSIONS = ['.jpg', '.png', '.jpeg']
 
     FONTS = [cv2.FONT_HERSHEY_COMPLEX,
@@ -51,7 +51,6 @@ class NoiseDataloader(Dataset):
     def convert_model_output_to_image(torch_tensor):
         return torch.as_tensor(torch_tensor).to('cpu').detach().numpy().transpose(1, 2, 0)
 
-
     def __init__(self, dataset_type=TEST, noisy_per_image=500, noise_type=GAUSSIAN):
 
         self.dataset_type = dataset_type
@@ -86,10 +85,8 @@ class NoiseDataloader(Dataset):
         self.noisy_per_patch = noisy_per_image
         self.noise_type = noise_type
 
-
     def __len__(self):
         return self.noisy_per_patch * self.number_of_clean_patches
-
 
     def __getitem__(self, idx):
         clean_patch = self.clean_patches[int(idx) % self.number_of_clean_patches]
@@ -147,7 +144,7 @@ class NoiseDataloader(Dataset):
             font_size = np.random.uniform(2, 4)
             col = tuple(np.random.randint(0, 255, 3).astype(np.float64))
             # thickness = np.random.randint(3, 10)
-            pos = (np.random.randint(0-x/100, x-x/50), np.random.randint(0-y/100, y-y/25))
+            pos = (np.random.randint(0 - x / 100, x - x / 50), np.random.randint(0 - y / 100, y - y / 25))
             noise = cv2.putText(noise, string, pos, font, font_size, col, 3, line_style)
 
         return noise
@@ -164,11 +161,11 @@ class NoiseDataloader(Dataset):
         total = black_ratio + white_ratio
         x, y = img.shape[0], img.shape[1]
 
-        indexes = np.random.choice(np.arange(x*y), size=int(total*x*y),
+        indexes = np.random.choice(np.arange(x * y), size=int(total * x * y),
                                    replace=False)
-        b_indexes = np.random.choice(indexes, size=int(black_ratio*x*y),
+        b_indexes = np.random.choice(indexes, size=int(black_ratio * x * y),
                                      replace=False)
-        w_indexes = np.random.choice(indexes, size=int(white_ratio*x*y),
+        w_indexes = np.random.choice(indexes, size=int(white_ratio * x * y),
                                      replace=False)
 
         vector_index = np.vectorize(lambda i: NoiseDataloader.index_1d_to_2d(i, y))
@@ -190,7 +187,7 @@ class NoiseDataloader(Dataset):
 
         x, y = img.shape[0], img.shape[1]
 
-        indexes = np.random.choice(np.arange(x*y), size=int(ratio*x*y),
+        indexes = np.random.choice(np.arange(x * y), size=int(ratio * x * y),
                                    replace=False)
 
         vector_index = np.vectorize(lambda i: NoiseDataloader.index_1d_to_2d(i, y))

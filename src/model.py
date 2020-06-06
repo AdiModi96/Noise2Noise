@@ -3,7 +3,6 @@ import torch.nn as nn
 
 
 class UNET(nn.Module):
-
     input_channels = 3
 
     def __init__(self):
@@ -109,7 +108,6 @@ class UNET(nn.Module):
 
 
 class EncoderDecoder(nn.Module):
-
     input_channels = 3
 
     def __init__(self):

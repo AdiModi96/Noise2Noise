@@ -10,12 +10,11 @@ import random
 
 
 def test(noise_type):
-
     global test_dataset
     if noise_type == NoiseDataloader.GAUSSIAN:
         test_dataset = NoiseDataloader(dataset_type=NoiseDataloader.TEST,
-                                  noisy_per_image=1,
-                                  noise_type=NoiseDataloader.GAUSSIAN)
+                                       noisy_per_image=1,
+                                       noise_type=NoiseDataloader.GAUSSIAN)
     elif noise_type == NoiseDataloader.TEXT_OVERLAY:
         test_dataset = NoiseDataloader(dataset_type=NoiseDataloader.TEST,
                                        noisy_per_image=1,

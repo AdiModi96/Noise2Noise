@@ -40,6 +40,7 @@ DATASET = {
     'NOISY_PER_IMAGE': 300
 }
 
+
 # --------------------------------------------------------------
 
 
@@ -56,7 +57,6 @@ def train():
     network.to(MODEL['DEVICE'])
     network.train()
 
-
     train_dataset = NoiseDataloader(dataset_type=NoiseDataloader.TRAIN,
                                     noisy_per_image=DATASET['NOISY_PER_IMAGE'],
                                     noise_type=DATASET['NOISE_TYPE'])
@@ -64,8 +64,8 @@ def train():
     train_batcher = DataLoader(dataset=train_dataset,
                                batch_size=MODEL['BATCH_SIZE'],
                                # shuffle=True)
-                               shuffle = True,
-                               num_workers = MODEL['NUM_WORKERS'])
+                               shuffle=True,
+                               num_workers=MODEL['NUM_WORKERS'])
 
     optimizer = optim.Adam(network.parameters(),
                            lr=OPTIMIZER['LR'],
